@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'state-project';
+
+  counter = 0;
+
+  soma = 0;
+
+  setContador(event: string) {
+    this.counter++;
+    this.soma = Number(event)+this.counter;
+
+    return this.soma;
+  }
 }
