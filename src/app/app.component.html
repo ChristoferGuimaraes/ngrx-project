@@ -1,5 +1,6 @@
-<input #contar type="string" ><button (click)="setContador(contar.value)">Contar</button>
-<app-display-contador [counter]="counter"></app-display-contador>
+<button (click)="incrementCounter()">Incrementa</button>
+<button (click)="decrementCounter()">Decrementa</button>
+<app-display-contador></app-display-contador>
 <br>
 
-<h1>{{counter}}</h1>
+<h1>{{counter$ | async}}</h1>

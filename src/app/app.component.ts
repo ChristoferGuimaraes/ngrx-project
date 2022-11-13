@@ -1,4 +1,7 @@
+import { decrementCounter, IAppState, incrementCounter } from './store/app.state';
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,16 +9,18 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'state-project';
 
-  counter = 0;
+  constructor(private store: Store<{ app: IAppState }>) {}
 
-  soma = 0;
+  counter$ = this.store.select('app').pipe(
+    map(e => e.counter)
+  );
 
-  setContador(event: string) {
-    this.counter++;
-    this.soma = Number(event)+this.counter;
+  incrementCounter() {
+    this.store.dispatch(incrementCounter())
+  };
 
-    return this.soma;
-  }
+  decrementCounter() {
+    this.store.dispatch(decrementCounter())
+  };
 }
