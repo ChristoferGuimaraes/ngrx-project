@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DisplayContadorComponent } from './display-contador.component';
+import { DisplayCounterComponent } from './display-counter.component';
 
 describe('DisplayContadorComponent', () => {
-  let component: DisplayContadorComponent;
-  let fixture: ComponentFixture<DisplayContadorComponent>;
+  let component: DisplayCounterComponent;
+  let fixture: ComponentFixture<DisplayCounterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DisplayContadorComponent ]
+      declarations: [ DisplayCounterComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DisplayContadorComponent);
+    fixture = TestBed.createComponent(DisplayCounterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

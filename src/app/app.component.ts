@@ -1,5 +1,5 @@
 import { decrementCounter, IAppState, incrementCounter } from './store/app.state';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
