@@ -10,12 +10,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoComponent } from './components/todo/todo.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayCounterComponent,
-    TodoComponent
+    TodoComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
