@@ -8,14 +8,18 @@ import { DisplayCounterComponent } from './components/display-counter/display-co
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { TodoComponent } from './components/todo/todo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DisplayCounterComponent
+    DisplayCounterComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({ app: appReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })

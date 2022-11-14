@@ -30,9 +30,7 @@ export const appReducer = createReducer(
 
     return state;
   }),
-  on(setCounter, (state, action) => {
-    const payload = action.payload;
-
+  on(setCounter, (state, { payload }) => {
     state = {
       ...state,
       counter: payload

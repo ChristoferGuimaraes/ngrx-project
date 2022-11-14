@@ -10,11 +10,14 @@ import { map } from 'rxjs';
 })
 export class AppComponent {
 
-  constructor(private store: Store<{ app: IAppState }>) {};
-
   counter$ = this.store.select('app').pipe(
-    map(e => e.counter)
-  );
+      map(e => e.counter)
+    );
+
+  constructor(
+    private store: Store<{ app: IAppState }>) {
+
+    };
 
   incrementCounter() {
     this.store.dispatch(incrementCounter());
@@ -28,4 +31,5 @@ export class AppComponent {
     const transformedNumber = parseFloat(event);
     this.store.dispatch(setCounter({ payload: transformedNumber }));
   };
+
 }
