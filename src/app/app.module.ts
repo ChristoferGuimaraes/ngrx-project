@@ -12,23 +12,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { TodoComponent } from './components/todo/todo.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { EffectsModule } from '@ngrx/effects';
+import { TodosEffectService } from './store/todos.effect.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayCounterComponent,
     TodoComponent,
-    CounterComponent
+    CounterComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({ app: appReducer }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([])
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([TodosEffectService]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,5 +1,5 @@
 import { map } from 'rxjs';
-import { IAppState, setTodos } from './../../store/app.state';
+import { IAppState, setTodos, loadTodos } from './../../store/app.state';
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -12,28 +12,10 @@ import { Component, OnInit } from '@angular/core';
 export class TodoComponent implements OnInit {
   todos$ = this.store.select('app').pipe(map((app) => app.todos));
 
-  constructor(
-    private http: HttpClient,
-    private store: Store<{ app: IAppState }>
-  ) {}
+  constructor(private store: Store<{ app: IAppState }>) {}
 
   ngOnInit(): void {
-    this.store
-      .select('app')
-      .pipe(map((app) => app.todos))
-      .subscribe({
-        next: (todos) => {
-          if (todos.length === 0) {
-            this.http
-              .get<ITodo[]>('https://jsonplaceholder.typicode.com/todos')
-              .subscribe({
-                next: (res) => {
-                  this.store.dispatch(setTodos({ payload: res }));
-                },
-              });
-          }
-        },
-      });
+    this.store.dispatch(loadTodos())
   }
 }
 export interface ITodo {
