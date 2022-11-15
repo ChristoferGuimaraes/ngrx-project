@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoComponent } from './components/todo/todo.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CounterComponent } from './components/counter/counter.component';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({ app: appReducer }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

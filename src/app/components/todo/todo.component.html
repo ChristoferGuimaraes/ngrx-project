@@ -3,7 +3,7 @@
 <br>
 
 <ul>
-  <li *ngFor="let todo of todos">
+  <li *ngFor="let todo of (todos$ | async)">
     {{ todo.title }}
   </li>
 </ul>
