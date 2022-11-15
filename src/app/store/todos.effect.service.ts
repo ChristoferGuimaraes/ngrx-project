@@ -3,7 +3,7 @@ import { loadTodos, successLoadTodos } from './app.state';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs';
+import { EMPTY, map, switchMap, tap, of, withLatestFrom } from 'rxjs';
 import { ITodo } from '../components/todo/todo.component';
 import { Store } from '@ngrx/store';
 
@@ -20,11 +20,16 @@ export class TodosEffectService {
   loadAllTodos = createEffect(() =>
     this.actions$.pipe(
       ofType(loadTodos),
-      switchMap(() =>
-        this.http.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos')
-      ),
-      tap((todos) => this.store.dispatch(setTodos({ payload: todos }))),
-      map(() => successLoadTodos())
+      withLatestFrom(this.store.select('app').pipe(map((app) => app.todos))),
+      switchMap(([_, todos]) => {
+        if(todos.length === 0) {
+          return this.http.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos').pipe(
+            tap((todos) => this.store.dispatch(setTodos({ payload: todos }))),
+            map(() => successLoadTodos())
+          )
+        }
+        return of(successLoadTodos());
+      }),
     )
   );
 }
