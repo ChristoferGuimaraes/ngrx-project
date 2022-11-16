@@ -1,23 +1,36 @@
-import { createAction, createReducer, on, props } from "@ngrx/store";
+import { ITodo } from './../components/todo/todo.component';
+import { createAction, createReducer, on, props } from '@ngrx/store';
 
 export interface IAppState {
- counter: number;
-};
+  counter: number;
+  todos: ITodo[];
+}
 
 export const initialState: IAppState = {
-  counter: 0
+  counter: 0,
+  todos: [],
 };
 
 export const incrementCounter = createAction('[App] Increment Counter');
 export const decrementCounter = createAction('[App] Decrement Counter');
-export const setCounter = createAction('[App] Set Counter', props<{ payload: number }>());
+export const setCounter = createAction(
+  '[App] Set Counter',
+  props<{ payload: number }>()
+);
+
+export const successLoadTodos = createAction('[App] [Success] Load Todos');
+export const loadTodos = createAction('[App] Load Todos');
+export const setTodos = createAction(
+  '[App] Set Todos',
+  props<{ payload: ITodo[] }>()
+);
 
 export const appReducer = createReducer(
   initialState,
   on(incrementCounter, (state) => {
     state = {
       ...state,
-      counter: state.counter + 1
+      counter: state.counter + 1,
     };
 
     return state;
@@ -25,21 +38,25 @@ export const appReducer = createReducer(
   on(decrementCounter, (state) => {
     state = {
       ...state,
-      counter: state.counter -1
+      counter: state.counter - 1,
     };
 
     return state;
   }),
-  on(setCounter, (state, action) => {
-    const payload = action.payload;
-
+  on(setCounter, (state, { payload }) => {
     state = {
       ...state,
-      counter: payload
+      counter: payload,
+    };
+
+    return state;
+  }),
+  on(setTodos, (state, { payload }) => {
+    state = {
+      ...state,
+      todos: payload,
     };
 
     return state;
   })
 );
-
-

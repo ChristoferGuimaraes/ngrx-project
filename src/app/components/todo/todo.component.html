@@ -1,0 +1,13 @@
+<button routerLink="/counter">Ir para Contador</button>
+
+<br>
+
+<ul>
+  <li *ngFor="let todo of (todos$ | async)">
+    {{ todo.title }}
+  </li>
+</ul>
+
+
+
+

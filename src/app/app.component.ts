@@ -1,5 +1,5 @@
 import { decrementCounter, IAppState, incrementCounter, setCounter } from './store/app.state';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
@@ -8,24 +8,12 @@ import { map } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  constructor(private store: Store<{ app: IAppState }>) {};
+  constructor() {}
 
-  counter$ = this.store.select('app').pipe(
-    map(e => e.counter)
-  );
+  ngOnInit(): void {
 
-  incrementCounter() {
-    this.store.dispatch(incrementCounter());
-  };
+  }
 
-  decrementCounter() {
-    this.store.dispatch(decrementCounter());
-  };
-
-  setCounter(event: string) {
-    const transformedNumber = parseFloat(event);
-    this.store.dispatch(setCounter({ payload: transformedNumber }));
-  };
 }
